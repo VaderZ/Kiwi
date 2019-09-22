@@ -24,6 +24,7 @@ services:
         volumes:
             - uploads:/Kiwi/uploads:Z
         environment:
+            KIWI_DONT_ENFORCE_HTTPS: 'true'
             KIWI_DB_ENGINE: django.db.backends.postgresql_psycopg2
             KIWI_DB_HOST: db
             KIWI_DB_PORT: 5432
