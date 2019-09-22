@@ -34,5 +34,8 @@ RUN sed -i "s/tcms.settings.devel/tcms.settings.product/" manage.py && \
 RUN pip install --no-cache-dir -r requirements/mariadb.txt
 RUN pip install --no-cache-dir -r requirements/postgres.txt
 
+# Install custom requirements
+RUN pip install --no-cache-dir -r requirements/custom.txt
+
 # compile gettext translations
 RUN ./manage.py compilemessages
