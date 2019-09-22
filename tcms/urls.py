@@ -69,6 +69,9 @@ urlpatterns = [
     # JavaScript translations, see
     # https://docs.djangoproject.com/en/2.1/topics/i18n/translation/#django.views.i18n.JavaScriptCatalog
     url(r'^jsi18n/$', JavaScriptCatalog.as_view(), name='javascript-catalog'),
+
+    # Social auth app
+    url('', include('social_django.urls', namespace='social')),
 ]
 
 
