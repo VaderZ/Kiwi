@@ -26,6 +26,7 @@ services:
             - 443:8443
         volumes:
             - uploads:/Kiwi/uploads:Z
+            - ./local_settings.py:/venv/lib64/python3.6/site-packages/tcms/settings/local_settings.py
         environment:
             KIWI_DONT_ENFORCE_HTTPS: 'true'
             KIWI_DB_ENGINE: django.db.backends.postgresql_psycopg2

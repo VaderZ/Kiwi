@@ -1,5 +1,6 @@
 import uuid
 
+from django.conf import settings
 from django.urls import reverse
 from django.contrib import messages
 from django.http import HttpResponseRedirect
@@ -14,6 +15,16 @@ def email_is_required(strategy, details, backend, user=None, *args, **kwargs):
             strategy.request or backend.strategy.request,
             _("Email address is required")
         )
+        return HttpResponseRedirect(reverse('tcms-login'))
+
+
+def filter_email_domains(strategy, details, backend, user=None, *args, **kwargs):
+    if hasattr(settings, 'ALLOWED_EMAIL_DOMAINS'):
+        if not any([email in details['email'] for email in settings.ALLOWED_SOCIAL_DOMAINS]):
+            messages.error(
+                strategy.request or backend.strategy.request,
+                _("Email address is not allowed")
+            )
         return HttpResponseRedirect(reverse('tcms-login'))
 
 

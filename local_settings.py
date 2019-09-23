@@ -3,6 +3,8 @@ import os
 from django.conf import settings
 
 
+# SECRET_KEY =
+
 settings.STATICFILES_DIRS.insert(0, os.path.join(settings.TCMS_ROOT_PATH, 'addons_static'))
 settings.TEMPLATES[0]['DIRS'].insert(0, os.path.join(settings.TCMS_ROOT_PATH, 'addons_templates'))
 ROOT_URLCONF = 'addons.urls'
@@ -27,6 +29,7 @@ settings.TEMPLATES[0]['OPTIONS']['context_processors'].extend([
 SOCIAL_AUTH_PIPELINE = [
     'social_core.pipeline.social_auth.social_details',
     'addons.pipeline.email_is_required',
+    'addons.pipeline.filter_email_domains',
     'social_core.pipeline.social_auth.social_uid',
     'social_core.pipeline.social_auth.social_user',
     'social_core.pipeline.user.get_username',
@@ -46,11 +49,17 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
+AUTO_APPROVE_NEW_USERS = True
+DISABLE_REGISTRATION = True
+ALLOWED_EMAIL_DOMAINS = []
+
 # Google OAuth Client Id and Secret
 # SOCIAL_AUTH_GOOGLE_OAUTH2_KEY =
 # SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET =
 
 # Amazon SES
+# DEFAULT_FROM_EMAIL = 'kiwi@example.com'
+# EMAIL_SUBJECT_PREFIX = '[Kiwi-TCMS] '
 # EMAIL_BACKEND = 'django_ses.SESBackend'
 # AWS_SES_ACCESS_KEY_ID =
 # AWS_SES_SECRET_ACCESS_KEY =
