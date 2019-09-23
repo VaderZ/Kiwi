@@ -1,0 +1,17 @@
+{% extends "registration/login.html" %}
+{% load static %}
+
+{% block custom_login %}
+<div>
+    <p>
+        or Continue With
+    </p>
+
+    <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}">
+        {% with "images/social_auth/backends/google.png" as image_path %}
+            <img src='{% static image_path %}' alt="Google login" title="Google login">
+        {% endwith %}
+    </a>
+
+</div>
+{% endblock %}
