@@ -79,7 +79,7 @@ docker-image:
 	docker run --rm --security-opt label=disable \
 	            -v `pwd`:/host --entrypoint /bin/cp kiwitcms/buildroot \
 	            -r /venv /host/dist/
-	docker build -t kiwitcms/kiwi:latest .
+	docker build -t kiwitcm .
 
 .PHONY: test-docker-image
 test-docker-image: docker-image

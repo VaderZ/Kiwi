@@ -1,4 +1,4 @@
-FROM centos:centos7
+FROM centos:centos7 as kiwi_root
 
 RUN rpm -Uhv https://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-11.noarch.rpm && \
     yum -y --setopt=tsflags=nodocs install centos-release-scl && \
@@ -49,3 +49,10 @@ RUN /Kiwi/manage.py collectstatic --noinput --link
 RUN chown -R 1001 /Kiwi/ /venv/ \
     /etc/pki/tls/certs/localhost.crt /etc/pki/tls/private/localhost.key
 USER 1001
+
+FROM kiwi_root as kiwi
+
+USER 1001
+
+COPY ./requirements/addons.txt /Kiwi/
+RUN pip install --no-cache-dir -r /Kiwi/addons.txt

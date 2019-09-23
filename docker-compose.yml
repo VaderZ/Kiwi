@@ -1,34 +1,35 @@
-version: '2'
+version: '3.4'
 
 services:
     db:
         container_name: kiwi_db
-        image: centos/mariadb
+        image: centos/postgresql-10-centos7
         volumes:
-            - db_data:/var/lib/mysql
+            - db_data:/var/lib/pgsql/data
         restart: always
         environment:
-            MYSQL_ROOT_PASSWORD: kiwi-1s-aw3s0m3
-            MYSQL_DATABASE: kiwi
-            MYSQL_USER: kiwi
-            MYSQL_PASSWORD: kiwi
-            MYSQL_CHARSET: utf8
-            MYSQL_COLLATION: utf8_unicode_ci
+            POSTGRESQL_DATABASE: kiwi
+            POSTGRESQL_USER: kiwi
+            POSTGRESQL_PASSWORD: kiwi
 
     web:
         container_name: kiwi_web
         depends_on:
             - db
         restart: always
-        image: kiwitcms/kiwi:latest
+        image: kiwitcm
+        build:
+            context: .
+            target: kiwi
         ports:
             - 80:8080
             - 443:8443
         volumes:
             - uploads:/Kiwi/uploads:Z
         environment:
+            KIWI_DB_ENGINE: django.db.backends.postgresql_psycopg2
             KIWI_DB_HOST: db
-            KIWI_DB_PORT: 3306
+            KIWI_DB_PORT: 5432
             KIWI_DB_NAME: kiwi
             KIWI_DB_USER: kiwi
             KIWI_DB_PASSWORD: kiwi
