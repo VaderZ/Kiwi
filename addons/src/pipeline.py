@@ -25,7 +25,7 @@ def filter_email_domains(strategy, details, backend, user=None, *args, **kwargs)
                 strategy.request or backend.strategy.request,
                 _("Email address is not allowed")
             )
-        return HttpResponseRedirect(reverse('tcms-login'))
+            return HttpResponseRedirect(reverse('tcms-login'))
 
 
 def initiate_defaults(strategy, details, backend, user=None, *args, **kwargs):
