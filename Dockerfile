@@ -59,8 +59,10 @@ RUN pip install --no-cache-dir -r /Kiwi/addons.txt
 
 COPY ./addons/src/ /venv/lib64/python3.6/site-packages/addons/
 COPY ./addons/templates/ /venv/lib64/python3.6/site-packages/tcms/addons_templates/
-COPY ./addons/static/ /Kiwi/static/
+COPY ./addons/static/ /venv/lib64/python3.6/site-packages/tcms/addons_static/
 
+# Add temp local_settings to collect static files
+COPY ./static_links.py /venv/lib64/python3.6/site-packages/tcms/settings/local_settings.py
 # woraround broken CSS which will break collectstatic
 # because they refer to non-existing ../fonts/glyphicons-halflings-regular.eot (no fonts/ directory)
 # remove django_tenants/templates/admin/index.html b/c it is ugly and b/c we use grapelli
@@ -71,3 +73,6 @@ RUN rm -rf /venv/lib64/python3.6/site-packages/tcms/node_modules/c3/htdocs/ \
 
 # collect static files again
 RUN /Kiwi/manage.py collectstatic --clear --link --noinput
+
+# Remove temp local_settings
+RUN rm /venv/lib64/python3.6/site-packages/tcms/settings/local_settings.py
