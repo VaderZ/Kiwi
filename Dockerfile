@@ -59,7 +59,7 @@ RUN pip install --no-cache-dir -r /Kiwi/addons.txt
 
 COPY ./addons/src/ /venv/lib64/python3.6/site-packages/addons/
 COPY ./addons/templates/ /venv/lib64/python3.6/site-packages/tcms/addons_templates/
-COPY ./addons/static/ /venv/lib64/python3.6/site-packages/tcms/addons_static/
+COPY ./addons/static/ /Kiwi/static/
 
 # woraround broken CSS which will break collectstatic
 # because they refer to non-existing ../fonts/glyphicons-halflings-regular.eot (no fonts/ directory)
