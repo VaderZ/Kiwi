@@ -20,7 +20,7 @@ def email_is_required(strategy, details, backend, user=None, *args, **kwargs):
 
 def filter_email_domains(strategy, details, backend, user=None, *args, **kwargs):
     if hasattr(settings, 'ALLOWED_EMAIL_DOMAINS'):
-        if not any([email in details['email'] for email in settings.ALLOWED_SOCIAL_DOMAINS]):
+        if not any([email in details['email'] for email in settings.ALLOWED_EMAIL_DOMAINS]):
             messages.error(
                 strategy.request or backend.strategy.request,
                 _("Email address is not allowed")
