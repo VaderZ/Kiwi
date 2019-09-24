@@ -7,7 +7,7 @@
         or Continue With
     </p>
 
-    <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}">
+    <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.GET.next }}">
         {% with "images/social_auth/backends/google.png" as image_path %}
             <img src='{% static image_path %}' alt="Google login" title="Google login">
         {% endwith %}
